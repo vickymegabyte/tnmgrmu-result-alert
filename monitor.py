@@ -4,7 +4,7 @@ import os
 
 URL = "https://cms2results.tnmgrmuexam.ac.in/#/ExamResult"
 
-TOKEN = os.environ["8480748605:AAF6dQMcFevNGpQTKYb3MOtZi46emf_HjXE"]
+TOKEN = os.environ["tnmgrmu_result_alert_bot"]
 CHAT_ID = os.environ["6780399594"]
 
 def get_hash():
