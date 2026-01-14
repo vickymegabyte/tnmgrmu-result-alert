@@ -7,7 +7,10 @@ def get_hash():
     r = requests.get(URL, timeout=20)
     return hashlib.md5(r.text.encode()).hexdigest()
 
-def send_telegram(msg, token, chat_id):
+def import os
+TOKEN = os.environ["tnmgrmu_result_alert_bot"]
+CHAT_ID = os.environ["6780399594"]
+:
     url = f"https://api.telegram.org/bot{token}/sendMessage"
     requests.post(url, json={"chat_id": chat_id, "text": msg})
 
