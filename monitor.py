@@ -7,7 +7,7 @@ def get_hash():
     r = requests.get(URL, timeout=20)
     return hashlib.md5(r.text.encode()).hexdigest()
 
-def import os
+import os
 TOKEN = os.environ["tnmgrmu_result_alert_bot"]
 CHAT_ID = os.environ["6780399594"]
 :
