@@ -4,37 +4,53 @@ import os
 
 URL = "https://cms2results.tnmgrmuexam.ac.in/#/ExamResult"
 
-TOKEN = os.environ.get("TNMGRMU_BOT_TOKEN")
-CHAT_ID = os.environ.get("TNMGRMU_CHAT_ID")
+BOT_TOKEN = os.environ["TNMGRMU_BOT_TOKEN"]
+CHAT_ID = os.environ["TNMGRMU_CHAT_ID"]
 
-if not TOKEN or not CHAT_ID:
-    raise ValueError("Telegram BOT TOKEN or CHAT ID not set")
+# Keywords to detect B.Pharm results
+KEYWORDS = ["B.PHARM", "BPHARM", "B PHARM", "PHARMACY","MPHARM","M PHARM", "M.PHARM", "PHARM"]
 
+def get_page_content():
+    response = requests.get(URL, timeout=20)
+    response.raise_for_status()
+    return response.text.upper()
 
-def get_hash():
-    r = requests.get(URL, timeout=20)
-    return hashlib.md5(r.text.encode()).hexdigest()
+def get_hash(content):
+    return hashlib.md5(content.encode()).hexdigest()
 
-def send_telegram(msg):
-    url = f"https://api.telegram.org/bot{TOKEN}/sendMessage"
-    requests.post(url, json={
+def send_telegram(message):
+    telegram_url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
+    payload = {
         "chat_id": CHAT_ID,
-        "text": msg
-    })
+        "text": message
+    }
+    requests.post(telegram_url, json=payload)
+
+def contains_bpharm(content):
+    return any(keyword in content for keyword in KEYWORDS)
 
 def main():
-    with open("hash.txt", "r") as f:
-        old_hash = f.read().strip()
+    content = get_page_content()
+    current_hash = get_hash(content)
 
-    new_hash = get_hash()
+    # Read old hash
+    try:
+        with open("hash.txt", "r") as f:
+            old_hash = f.read()
+    except FileNotFoundError:
+        old_hash = ""
 
-    if new_hash != old_hash:
+    # Update hash file
+    with open("hash.txt", "w") as f:
+        f.write(current_hash)
+
+    # Alert only if page changed AND B.Pharm mentioned
+    if current_hash != old_hash and contains_bpharm(content):
         send_telegram(
-            "🚨 TNMGRMU Result Update Detected!\n\n"
+            "🎓 **B.PHARM RESULT PUBLISHED (TNMGRMU)**\n\n"
+            "Check now:\n"
             "https://cms2results.tnmgrmuexam.ac.in/#/ExamResult"
         )
-        with open("hash.txt", "w") as f:
-            f.write(new_hash)
 
 if __name__ == "__main__":
     main()
