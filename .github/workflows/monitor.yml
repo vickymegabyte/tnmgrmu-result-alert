@@ -12,6 +12,4 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install dependencies
         run: pip install requests
-        - name: Run monitor
-  run: python monitor.py
 
