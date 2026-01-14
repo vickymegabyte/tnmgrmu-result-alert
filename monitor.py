@@ -19,5 +19,6 @@ def send_telegram(msg):
 
 def main():
     send_telegram("🧪 TEST ALERT — DEBUG MODE")
+if __name__ == "__main__":
+    main()
 
-main()
