@@ -8,7 +8,7 @@ BOT_TOKEN = os.environ["TNMGRMU_BOT_TOKEN"]
 CHAT_ID = os.environ["TNMGRMU_CHAT_ID"]
 
 # Keywords to detect B.Pharm results
-KEYWORDS = ["B.PHARM", "BPHARM", "B PHARM", "PHARMACY","MPHARM","M PHARM", "M.PHARM", "PHARM"]
+KEYWORDS = ["B.PHARM", "BPHARM", "B PHARM", "PHARMACY","MPHARM","M PHARM", "M.PHARM", "M.Sc", "PHARM"]
 
 def get_page_content():
     response = requests.get(URL, timeout=20)
