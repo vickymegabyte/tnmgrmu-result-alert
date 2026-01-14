@@ -2,7 +2,7 @@ name: TNMGRMU Result Monitor
 
 on:
   schedule:
-    - cron: "* * * * *"
+    - cron: "*/3 * * * *"
   workflow_dispatch:
 
 jobs:
