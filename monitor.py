@@ -4,8 +4,12 @@ import os
 
 URL = "https://cms2results.tnmgrmuexam.ac.in/#/ExamResult"
 
-TOKEN = os.environ["tnmgrmu_result_alert_bot"]
-CHAT_ID = os.environ["6780399594"]
+TOKEN = os.environ.get("TNMGRMU_BOT_TOKEN")
+CHAT_ID = os.environ.get("TNMGRMU_CHAT_ID")
+
+if not TOKEN or not CHAT_ID:
+    raise ValueError("Telegram BOT TOKEN or CHAT ID not set")
+
 
 def get_hash():
     r = requests.get(URL, timeout=20)
