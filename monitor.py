@@ -30,8 +30,8 @@ def contains_bpharm(content):
     return any(keyword in content for keyword in KEYWORDS)
 
 def main():
-    content = get_page_content()
-    current_hash = get_hash(content)
+    send_telegram("🧪 TEST ALERT\n\nYour TNMGRMU Result Alert Bot is working correctly ✅")
+
 
     # Read old hash
     try:
