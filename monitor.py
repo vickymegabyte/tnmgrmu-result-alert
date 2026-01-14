@@ -32,7 +32,6 @@ def contains_bpharm(content):
 def main():
     send_telegram("🧪 TEST ALERT\n\nYour TNMGRMU Result Alert Bot is working correctly ✅")
 
-
     # Read old hash
     try:
         with open("hash.txt", "r") as f:
