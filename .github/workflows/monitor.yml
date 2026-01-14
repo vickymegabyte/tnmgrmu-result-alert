@@ -13,8 +13,5 @@ jobs:
       - name: Install dependencies
         run: pip install requests
         - name: Run monitor
-  env:
-    TNMGRMU_BOT_TOKEN: ${{ secrets.TNMGRMU_BOT_TOKEN }}
-    TNMGRMU_CHAT_ID: ${{ secrets.TNMGRMU_CHAT_ID }}
   run: python monitor.py
 
